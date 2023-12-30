@@ -2,7 +2,10 @@ module jacc
 
 go 1.21.5
 
-require github.com/gofiber/fiber/v2 v2.51.0
+require (
+	github.com/gofiber/fiber/v2 v2.51.0
+	github.com/pelletier/go-toml v1.9.5
+)
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
