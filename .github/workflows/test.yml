@@ -20,4 +20,4 @@ jobs:
         go-version: '1.21'
 
     - name: Go Test
-      run: go test -v -cover 
+      run: go test -v -cover ./...
