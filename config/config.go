@@ -1,7 +1,6 @@
 package config
 
 import (
-	"log"
 	"os"
 
 	"github.com/pelletier/go-toml"
@@ -11,18 +10,18 @@ type Config struct {
 	Name string
 }
 
-// LoadConfig loads the config from config.toml
-func LoadConfig() Config {
-	configFile, err := os.ReadFile("config.toml")
+// LoadConfig loads the config from a given TOML file
+func LoadConfig(filePath string) (Config, error) {
+	configFile, err := os.ReadFile(filePath)
 	if err != nil {
-		log.Fatal(err)
+		return Config{}, err
 	}
 
 	config := Config{}
 	err = toml.Unmarshal(configFile, &config)
 	if err != nil {
-		log.Fatal(err)
+		return Config{}, err
 	}
 
-	return config
+	return config, nil
 }

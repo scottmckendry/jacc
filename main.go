@@ -12,8 +12,13 @@ import (
 )
 
 func main() {
-	app := startServer(config.LoadConfig())
-	err := app.Listen(":3000")
+	config, err := config.LoadConfig("config.toml")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	app := startServer(config)
+	err = app.Listen(":3000")
 	if err != nil {
 		log.Fatal(err)
 	}
