@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"net/http"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/a-h/templ"
+	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"
 
 	"jacc/config"
 )
@@ -17,21 +17,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	app := startServer(config)
-	err = app.Listen(":3000")
-	if err != nil {
-		log.Fatal(err)
-	}
-}
+	r := chi.NewRouter()
+	r.Use(middleware.Logger)
+	r.Get("/", templ.Handler(Body(config.Name)).ServeHTTP)
 
-func startServer(config config.Config) *fiber.App {
-	app := fiber.New()
-	app.Use(logger.New())
-	app.Use(recover.New())
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString(fmt.Sprintf("Hello, %s!", config.Name))
-	})
-
-	return app
+	http.ListenAndServe(":3000", r)
 }
