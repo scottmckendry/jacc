@@ -2,4 +2,73 @@
 name = "John Doe"
 tagLine = "Aspiring Software Engineer"
 profilePicture = "https://www.example.com/john-doe.jpg"
-skills = ["Java", "Python", "C++", "JavaScript", "HTML", "CSS", "SQL", "Git", "Docker", "Kubernetes", "AWS", "Azure", "GCP", "Linux", "Windows"]
+skills = [
+    "Java",
+    "Python",
+    "C++",
+    "JavaScript",
+    "HTML",
+    "CSS",
+    "React",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "SQL",
+    "Git",
+    "GitHub",
+    "Linux",
+    "Bash",
+    "Docker",
+    "Kubernetes",
+    "AWS",
+    "Azure"
+]
+
+[contact]
+email = "john@example.com"
+phone = "+1 (123) 456-7890"
+municipality = "Palo Alto, CA"
+
+[links]
+github = "https://github.com/johndoe"
+linkedin = "https://linkedin.com/in/johndoe"
+twitter = "https://twitter.com/johndoe"
+instagram = "https://instagram.com/johndoe"
+facebook = "https://facebook.com/johndoe"
+website = "https://johndoe.com"
+
+[[education]]
+name = "Stanford University"
+credential = "Bachelor of Science in Computer Science"
+startDate = "2018"
+endDate = "2022"
+
+[[education]]
+name = "Palo Alto High School"
+credential = "High School Diploma"
+startDate = "2014"
+endDate = "2018"
+
+[[experience]]
+name = "Google"
+title = "Software Engineering Intern"
+description = "Worked as a key member of the Google Search team supporting the development of the Google Search Engine. Demonstrated strong technical skills and the ability to work in a fast-paced environment."
+startDate = "Summer 2021"
+endDate = "Summer 2021"
+achievements = [
+    "Successfully implemented a new feature in the Google Search Engine",
+    "Added support for a new language in the Google Search Engine",
+    "Rebuilt the Google Search Engine from the ground up"
+]
+
+[[experience]]
+name = "Facebook"
+title = "Software Engineering Intern"
+description = "Worked as a key member of the Facebook Messenger team supporting the development of the Facebook Messenger application. Demonstrated strong technical skills and the ability to work in a fast-paced environment."
+startDate = "Summer 2020"
+endDate = "Summer 2020"
+achievements = [
+    "Successfully implemented a new feature in the Facebook Messenger application",
+    "Added support for a new language in the Facebook Messenger application",
+    "Rebuilt the Facebook Messenger application from the ground up"
+]

@@ -8,9 +8,37 @@ import (
 
 type Config struct {
 	Profile struct {
-		Name    string
-		TagLine string
-		Skills  []string
+		Name        string
+		TagLine     string
+		Description string
+		Skills      []string
+	}
+	Contact struct {
+		Email        string
+		Phone        string
+		Municipality string
+	}
+	Links struct {
+		Github    string
+		LinkedIn  string
+		Twitter   string
+		Instagram string
+		Facebook  string
+		Website   string
+	}
+	Education []struct {
+		Name       string
+		Credential string
+		StartDate  string
+		EndDate    string
+	}
+	Experience []struct {
+		Name         string
+		Title        string
+		Description  string
+		StartDate    string
+		EndDate      string
+		Achievements []string
 	}
 }
 

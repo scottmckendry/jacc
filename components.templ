@@ -1,20 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"jacc/config"
 )
-
-templ Profile(config config.Config) {
-	<div>
-		<h1>{ config.Profile.Name }</h1>
-		<h2>{ config.Profile.TagLine }</h2>
-		for _, skill := range config.Profile.Skills {
-			<div>
-				<h3>{ skill }</h3>
-			</div>
-		}
-	</div>
-}
 
 templ Index(config config.Config) {
 	<!DOCTYPE html>
@@ -23,12 +12,36 @@ templ Index(config config.Config) {
 			<title>JACC</title>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
-			<link href="css/style.css" rel="stylesheet"/>
+			<link href="public/css/style.css" rel="stylesheet"/>
+			<link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet"/>
 		</head>
 		<body>
-			<div>
+			<div class="profile">
 				@Profile(config)
+			</div>
+			<div class="contact">
+				@Contact(config)
 			</div>
 		</body>
 	</html>
+}
+
+templ Profile(config config.Config) {
+	<div>
+		<h1>{ config.Profile.Name }</h1>
+		<h2>{ config.Profile.TagLine }</h2>
+		<p>{ config.Profile.Description }</p>
+		<ul>
+			for _, skill := range config.Profile.Skills {
+				<li>{ skill }</li>
+			}
+		</ul>
+	</div>
+}
+
+templ Contact(config config.Config) {
+	<ul>
+		<li><a href={ templ.SafeURL(fmt.Sprintf("mailto:%s", config.Contact.Email)) }>{ config.Contact.Email }</a></li>
+		<li>{ config.Contact.Phone }</li>
+	</ul>
 }
