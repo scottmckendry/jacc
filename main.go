@@ -23,6 +23,10 @@ func main() {
 	r.Get("/html", templ.Handler(Index(config)).ServeHTTP)
 	r.Get("/", servePdf())
 
+	// Serve static files from the public directory
+	fs := http.FileServer(http.Dir("public"))
+	r.Handle("/public/*", http.StripPrefix("/public/", fs))
+
 	http.ListenAndServe(":3000", r)
 }
 
