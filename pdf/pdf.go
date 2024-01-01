@@ -1,12 +1,10 @@
 package pdf
 
 import (
-	"fmt"
-
 	"github.com/SebastiaanKlippert/go-wkhtmltopdf"
 )
 
-func GeneratePdf(url string, filename string) (string, error) {
+func GeneratePdf(url string, filePath string) (string, error) {
 	pdfGenerator, err := wkhtmltopdf.NewPDFGenerator()
 	if err != nil {
 		return "", err
@@ -21,12 +19,10 @@ func GeneratePdf(url string, filename string) (string, error) {
 		return "", err
 	}
 
-	invoiceFile := fmt.Sprintf("./public/%s.pdf", filename)
-
-	err = pdfGenerator.WriteFile(invoiceFile)
+	err = pdfGenerator.WriteFile(filePath)
 	if err != nil {
 		return "", err
 	}
 
-	return invoiceFile, nil
+	return filePath, nil
 }

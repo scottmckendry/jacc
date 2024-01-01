@@ -28,7 +28,10 @@ func main() {
 
 func servePdf() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		pdfFile, err := pdf.GeneratePdf("http://localhost:3000/html", "resume")
+		pdfFile, err := pdf.GeneratePdf(
+			"http://localhost:3000/html",
+			"public/cv.pdf",
+		)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}

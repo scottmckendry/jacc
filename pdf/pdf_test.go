@@ -9,7 +9,7 @@ import (
 func TestGeneratePdf(t *testing.T) {
 	url := "https://www.google.com"
 
-	pdfFile, err := pdf.GeneratePdf(url, "test")
+	pdfFile, err := pdf.GeneratePdf(url, "test.pdf")
 	if err != nil {
 		t.Error(err)
 	}
@@ -22,7 +22,7 @@ func TestGeneratePdf(t *testing.T) {
 func TestGeneratePdf_InvalidUrl(t *testing.T) {
 	url := "foo"
 
-	pdfFile, err := pdf.GeneratePdf(url, "test")
+	pdfFile, err := pdf.GeneratePdf(url, "test.pdf")
 	if err == nil {
 		t.Error("Expected an error to be returned.")
 	}
