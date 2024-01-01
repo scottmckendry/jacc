@@ -19,7 +19,7 @@ func main() {
 
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
-	r.Get("/", templ.Handler(Body(config.Name)).ServeHTTP)
+	r.Get("/", templ.Handler(Index(config)).ServeHTTP)
 
 	http.ListenAndServe(":3000", r)
 }

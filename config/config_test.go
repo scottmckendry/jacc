@@ -6,15 +6,15 @@ import (
 	"jacc/config"
 )
 
-const exampleConfigPath = "config.example.toml"
+const exampleConfigPath = "../config.toml"
 
 func TestLoadConfig(t *testing.T) {
 	config, err := config.LoadConfig(exampleConfigPath)
 	if err != nil {
 		t.Errorf("Expected err to be nil, got '%s'", err)
 	}
-	if config.Name != "Jacc" {
-		t.Errorf("Expected config.Name to be 'Jacc', got '%s'", config.Name)
+	if config.Profile.Name != "John Doe" {
+		t.Errorf("Expected config.Name to be 'Jacc', got '%s'", config.Profile.Name)
 	}
 }
 

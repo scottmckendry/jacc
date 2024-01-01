@@ -1,1 +1,5 @@
-name = "Scott"
+[profile]
+name = "John Doe"
+tagLine = "Aspiring Software Engineer"
+profilePicture = "https://www.example.com/john-doe.jpg"
+skills = ["Java", "Python", "C++", "JavaScript", "HTML", "CSS", "SQL", "Git", "Docker", "Kubernetes", "AWS", "Azure", "GCP", "Linux", "Windows"]

@@ -7,7 +7,11 @@ import (
 )
 
 type Config struct {
-	Name string
+	Profile struct {
+		Name    string
+		TagLine string
+		Skills  []string
+	}
 }
 
 // LoadConfig loads the config from a given TOML file
