@@ -9,6 +9,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 
 	"jacc/config"
+	"jacc/pdf"
 )
 
 func main() {
@@ -19,7 +20,19 @@ func main() {
 
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
-	r.Get("/", templ.Handler(Index(config)).ServeHTTP)
+	r.Get("/html", templ.Handler(Index(config)).ServeHTTP)
+	r.Get("/", servePdf())
 
 	http.ListenAndServe(":3000", r)
+}
+
+func servePdf() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		pdfFile, err := pdf.GeneratePdf("http://localhost:3000/html", "resume")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+
+		http.ServeFile(w, r, pdfFile)
+	}
 }
