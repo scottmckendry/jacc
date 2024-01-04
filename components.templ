@@ -22,6 +22,12 @@ templ Index(config config.Config) {
 			<div class="contact">
 				@Contact(config)
 			</div>
+			<div class="education">
+				@Education(config)
+			</div>
+			<div class="experience">
+				@Experience(config)
+			</div>
 		</body>
 	</html>
 }
@@ -44,4 +50,43 @@ templ Contact(config config.Config) {
 		<li><a href={ templ.SafeURL(fmt.Sprintf("mailto:%s", config.Contact.Email)) }>{ config.Contact.Email }</a></li>
 		<li>{ config.Contact.Phone }</li>
 	</ul>
+}
+
+templ Links(config config.Config) {
+}
+
+templ Education(config config.Config) {
+	<div>
+		<h2>Education</h2>
+		<ul>
+			for _, school := range config.Education {
+				<li>
+					<h3>{ school.Name }</h3>
+					<p>{ school.Credential }</p>
+					<p>{ school.StartDate } - { school.EndDate }</p>
+				</li>
+			}
+		</ul>
+	</div>
+}
+
+templ Experience(config config.Config) {
+	<div>
+		<h2>Experience</h2>
+		<ul>
+			for _, job := range config.Experience {
+				<li>
+					<h3>{ job.Name }</h3>
+					<p>{ job.Title }</p>
+					<p>{ job.StartDate } - { job.EndDate }</p>
+					<p>{ job.Description }</p>
+					<ul>
+						for _, achievement := range job.Achievements {
+							<li>{ achievement }</li>
+						}
+					</ul>
+				</li>
+			}
+		</ul>
+	</div>
 }
