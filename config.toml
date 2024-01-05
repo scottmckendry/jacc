@@ -1,3 +1,5 @@
+theme = "default"
+
 [profile]
 name = "John Doe"
 tagLine = "Aspiring Software Engineer"

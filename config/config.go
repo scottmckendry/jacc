@@ -7,6 +7,7 @@ import (
 )
 
 type Config struct {
+	Theme   string
 	Profile struct {
 		Name        string
 		TagLine     string
