@@ -27,11 +27,13 @@ theme = "default"
     ]
 
 [contact]
+    enabled = true
     email = "john@example.com"
     phone = "+1 (123) 456-7890"
     municipality = "Palo Alto, CA"
 
 [links]
+    enabled = true
     github = "https://github.com/johndoe"
     linkedin = "https://linkedin.com/in/johndoe"
     twitter = "https://twitter.com/johndoe"

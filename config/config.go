@@ -15,12 +15,14 @@ type Config struct {
 		Skills      []string
 	}
 	Contact struct {
+		Enabled      bool
 		Email        string
 		Phone        string
 		Municipality string
 	}
 	Links struct {
-		Github    string
+		Enabled   bool
+		GitHub    string
 		LinkedIn  string
 		Twitter   string
 		Instagram string
@@ -28,12 +30,14 @@ type Config struct {
 		Website   string
 	}
 	Education []struct {
+		Enabled    bool
 		Name       string
 		Credential string
 		StartDate  string
 		EndDate    string
 	}
 	Experience []struct {
+		Enabled      bool
 		Name         string
 		Title        string
 		Description  string

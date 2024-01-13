@@ -13,36 +13,46 @@ templ Index(config config.Config) {
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<link href={ fmt.Sprintf("public/css/%s.css", config.Theme) } rel="stylesheet"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 			<link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet"/>
 		</head>
 		<body>
 			<div class="profile">
 				@Profile(config)
 			</div>
-			<div class="contact">
-				@Contact(config)
-			</div>
-			<div class="education">
-				@Education(config)
-			</div>
-			<div class="experience">
-				@Experience(config)
-			</div>
+			if config.Contact.Enabled {
+				<div class="contact">
+					@Contact(config)
+				</div>
+			}
+			if config.Links.Enabled {
+				<div class="links">
+					@Links(config)
+				</div>
+			}
+			if len(config.Education) > 0 {
+				<div class="education">
+					@Education(config)
+				</div>
+			}
+			if len(config.Experience) > 0 {
+				<div class="experience">
+					@Experience(config)
+				</div>
+			}
 		</body>
 	</html>
 }
 
 templ Profile(config config.Config) {
-	<div>
-		<h1>{ config.Profile.Name }</h1>
-		<h2>{ config.Profile.TagLine }</h2>
-		<p>{ config.Profile.Description }</p>
-		<ul>
-			for _, skill := range config.Profile.Skills {
-				<li>{ skill }</li>
-			}
-		</ul>
-	</div>
+	<h1>{ config.Profile.Name }</h1>
+	<h2>{ config.Profile.TagLine }</h2>
+	<p>{ config.Profile.Description }</p>
+	<ul>
+		for _, skill := range config.Profile.Skills {
+			<li>{ skill }</li>
+		}
+	</ul>
 }
 
 templ Contact(config config.Config) {
@@ -53,40 +63,54 @@ templ Contact(config config.Config) {
 }
 
 templ Links(config config.Config) {
+	if config.Links.GitHub != "" {
+		<a href={ templ.SafeURL(config.Links.GitHub) }><i class="fa fa-github"></i></a>
+	}
+	if config.Links.LinkedIn != "" {
+		<a href={ templ.SafeURL(config.Links.LinkedIn) }><i class="fa fa-linkedin"></i></a>
+	}
+	if config.Links.Twitter != "" {
+		<a href={ templ.SafeURL(config.Links.Twitter) }><i class="fa fa-twitter"></i></a>
+	}
+	if config.Links.Instagram != "" {
+		<a href={ templ.SafeURL(config.Links.Instagram) }><i class="fa fa-instagram"></i></a>
+	}
+	if config.Links.Facebook != "" {
+		<a href={ templ.SafeURL(config.Links.Facebook) }><i class="fa fa-facebook"></i></a>
+	}
+	if config.Links.Website != "" {
+		<a href={ templ.SafeURL(config.Links.Website) }><i class="fa fa-globe"></i></a>
+	}
 }
 
 templ Education(config config.Config) {
-	<div>
-		<h2>Education</h2>
-		<ul>
-			for _, school := range config.Education {
-				<li>
-					<h3>{ school.Name }</h3>
-					<p>{ school.Credential }</p>
-					<p>{ school.StartDate } - { school.EndDate }</p>
-				</li>
-			}
-		</ul>
-	</div>
+	<h2>Education</h2>
+	<ul>
+		for _, school := range config.Education {
+			<li>
+				<h3>{ school.Name }</h3>
+				<p>{ school.Credential }</p>
+				<p>{ school.StartDate } - { school.EndDate }</p>
+			</li>
+		}
+	</ul>
 }
 
 templ Experience(config config.Config) {
-	<div>
-		<h2>Experience</h2>
-		<ul>
-			for _, job := range config.Experience {
-				<li>
-					<h3>{ job.Name }</h3>
-					<p>{ job.Title }</p>
-					<p>{ job.StartDate } - { job.EndDate }</p>
-					<p>{ job.Description }</p>
-					<ul>
-						for _, achievement := range job.Achievements {
-							<li>{ achievement }</li>
-						}
-					</ul>
-				</li>
-			}
-		</ul>
-	</div>
+	<h2>Experience</h2>
+	<ul>
+		for _, job := range config.Experience {
+			<li>
+				<h3>{ job.Name }</h3>
+				<p>{ job.Title }</p>
+				<p>{ job.StartDate } - { job.EndDate }</p>
+				<p>{ job.Description }</p>
+				<ul>
+					for _, achievement := range job.Achievements {
+						<li>{ achievement }</li>
+					}
+				</ul>
+			</li>
+		}
+	</ul>
 }
