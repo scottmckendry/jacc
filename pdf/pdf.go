@@ -10,6 +10,11 @@ func GeneratePdf(url string, filePath string) (string, error) {
 		return "", err
 	}
 
+	pdfGenerator.MarginTop.Set(0)
+	pdfGenerator.MarginBottom.Set(0)
+	pdfGenerator.MarginLeft.Set(0)
+	pdfGenerator.MarginRight.Set(0)
+
 	page := wkhtmltopdf.NewPage(url)
 
 	pdfGenerator.AddPage(page)
