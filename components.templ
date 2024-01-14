@@ -17,49 +17,68 @@ templ Index(config config.Config) {
 			<link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet"/>
 		</head>
 		<body>
-			<div class="profile">
-				@Profile(config)
+			<div class="container">
+				<div class="sidebar">
+					<div class="profile">
+						@Profile(config)
+					</div>
+					if config.Links.Enabled {
+						<div class="links">
+							@Links(config)
+						</div>
+					}
+					<div class="skills">
+						<ul>
+							for _, skill := range config.Profile.Skills {
+								<li>{ skill }</li>
+							}
+						</ul>
+					</div>
+					if config.Contact.Enabled {
+						<div class="contact">
+							@Contact(config)
+						</div>
+					}
+				</div>
+				<div class="main-content">
+					if len(config.Education) > 0 {
+						<div class="education">
+							@Education(config)
+						</div>
+					}
+					if len(config.Experience) > 0 {
+						<div class="experience">
+							@Experience(config)
+						</div>
+					}
+				</div>
 			</div>
-			if config.Contact.Enabled {
-				<div class="contact">
-					@Contact(config)
-				</div>
-			}
-			if config.Links.Enabled {
-				<div class="links">
-					@Links(config)
-				</div>
-			}
-			if len(config.Education) > 0 {
-				<div class="education">
-					@Education(config)
-				</div>
-			}
-			if len(config.Experience) > 0 {
-				<div class="experience">
-					@Experience(config)
-				</div>
-			}
 		</body>
 	</html>
 }
 
 templ Profile(config config.Config) {
-	<h1>{ config.Profile.Name }</h1>
-	<h2>{ config.Profile.TagLine }</h2>
-	<p>{ config.Profile.Description }</p>
-	<ul>
-		for _, skill := range config.Profile.Skills {
-			<li>{ skill }</li>
+	<div class="header">
+		if config.Profile.Image != "" {
+			<img src={ config.Profile.Image }/>
 		}
-	</ul>
+		<div class="name">
+			<h1>{ config.Profile.Name }</h1>
+			<h2>{ config.Profile.TagLine }</h2>
+		</div>
+	</div>
+	<p>{ config.Profile.Description }</p>
 }
 
 templ Contact(config config.Config) {
-	<ul>
-		<li><a href={ templ.SafeURL(fmt.Sprintf("mailto:%s", config.Contact.Email)) }>{ config.Contact.Email }</a></li>
-		<li>{ config.Contact.Phone }</li>
-	</ul>
+	<p>
+		<i class="fa fa-envelope"></i>
+		<a href={ templ.SafeURL(fmt.Sprintf("mailto:%s", config.Contact.Email)) }>{ config.Contact.Email }</a>
+	</p>
+	<p>
+		<i class="fa fa-phone"></i>
+		<a href={ templ.SafeURL(fmt.Sprintf("tel:%s", config.Contact.Phone)) }>{ config.Contact.Phone }</a>
+	</p>
 }
 
 templ Links(config config.Config) {
@@ -101,15 +120,19 @@ templ Experience(config config.Config) {
 	<ul>
 		for _, job := range config.Experience {
 			<li>
-				<h3>{ job.Name }</h3>
-				<p>{ job.Title }</p>
-				<p>{ job.StartDate } - { job.EndDate }</p>
-				<p>{ job.Description }</p>
-				<ul>
-					for _, achievement := range job.Achievements {
-						<li>{ achievement }</li>
-					}
-				</ul>
+				<div class="job-header">
+					<h3>{ job.Name }</h3>
+					<p>{ job.Title }</p>
+					<p>{ job.StartDate } - { job.EndDate }</p>
+				</div>
+				<div class="job-details">
+					<p>{ job.Description }</p>
+					<ul>
+						for _, achievement := range job.Achievements {
+							<li>{ achievement }</li>
+						}
+					</ul>
+				</div>
 			</li>
 		}
 	</ul>
