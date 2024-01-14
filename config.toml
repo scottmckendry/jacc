@@ -3,7 +3,7 @@ theme = "default"
 [profile]
     name = "John Doe"
     tagLine = "Aspiring Software Engineer"
-    profilePicture = "https://www.example.com/john-doe.jpg"
+    image = "https://avatars.githubusercontent.com/u/39483124?v=4"
     skills = [
         "Java",
         "Python",

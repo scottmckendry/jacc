@@ -12,6 +12,7 @@ type Config struct {
 		Name        string
 		TagLine     string
 		Description string
+		Image       string
 		Skills      []string
 	}
 	Contact struct {
